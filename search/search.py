@@ -111,8 +111,37 @@ def depthFirstSearch(problem: SearchProblem):
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # Initialize a FIFO queue for the fringe as required for BFS
+    fringe = util.Queue()
+    
+    # Get the starting state from the problem
+    start_state = problem.getStartState()
+    
+    # Push the start state and an empty list (representing the path of actions)
+    fringe.push((start_state, []))
+    
+    # Keep track of states we have already expanded to avoid infinite loops
+    expanded_states = []
+
+    while not fringe.isEmpty():
+        # Pop the shallowest node from the fringe
+        current_state, actions = fringe.pop()
+
+        # If it's the goal state, return the actions taken to get there
+        if problem.isGoalState(current_state):
+            return actions
+
+        # If we haven't expanded this state yet, process it
+        if current_state not in expanded_states:
+            expanded_states.append(current_state)
+            
+            # Get all possible successors from the current state
+            for successor, action, stepCost in problem.getSuccessors(current_state):
+                # Push the successor state and the updated path to the fringe
+                fringe.push((successor, actions + [action]))
+
+    # Return an empty list if no path is found
+    return []
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
