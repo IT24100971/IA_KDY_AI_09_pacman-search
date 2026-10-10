@@ -302,7 +302,7 @@ class CornersProblem(search.SearchProblem):
         )
 
         return (self.startingPosition, visited)
-        util.raiseNotDefined()
+        
 
     def isGoalState(self, state: Any):
         """
@@ -311,7 +311,7 @@ class CornersProblem(search.SearchProblem):
         "*** YOUR CODE HERE ***"
         position, visited = state
         return all(visited)
-        util.raiseNotDefined()
+        
 
     def getSuccessors(self, state: Any):
         """
