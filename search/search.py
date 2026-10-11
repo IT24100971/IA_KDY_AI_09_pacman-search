@@ -107,8 +107,7 @@ def depthFirstSearch(problem: SearchProblem):
                 fringe.push((successor, path + [action]))
 
     return []
-    util.raiseNotDefined()
-
+    
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     # Initialize a FIFO queue for the fringe as required for BFS
