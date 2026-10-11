@@ -507,7 +507,21 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    food_list = foodGrid.asList()
+    
+    # If there is no food left, the cost to the goal is 0
+    if not food_list:
+        return 0
+        
+    # Calculate the true maze distance to the furthest food dot
+    distances = []
+    for food in food_list:
+        # mazeDistance is already provided in searchAgents.py
+        dist = mazeDistance(position, food, problem.startingGameState)
+        distances.append(dist)
+        
+    # Return the maximum distance as our admissible heuristic
+    return max(distances)
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
